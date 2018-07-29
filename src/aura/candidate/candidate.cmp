@@ -1,0 +1,49 @@
+<aura:component controller="Resource">
+    <aura:attribute name="Candidate" type="Object"/>
+    <aura:attribute name="user"  type="AppUser__c"/>
+    <aura:attribute name="accept" type="List" default="['.doc', '.docx', '.pdf']"/>
+    <aura:attribute name="tempArr" type="String" />
+    <aura:attribute name="hideSpinner" type="Boolean" default="false"/>
+    
+    <aura:handler name="render" value="{!this}" action="{! c.doInit}" />
+    <aura:handler event="c:viewCandidate" action="{! c.candidate}"/>
+    
+	<lightning:layoutItem size="12" padding="around-medium">
+		<aura:if isTrue="{! v.hideSpinner }">    
+        <lightning:card >
+            <aura:set attribute="title">
+                <h1 class="slds-text-heading_large">{!v.Candidate.Name} </h1>
+            </aura:set>
+                
+			<aura:set attribute="actions">
+                <aura:if isTrue="{!v.Candidate.Status__c != 'Hired'}">
+                    <aura:if isTrue="{!v.Candidate.ContentDocumentLinks[0] == null }">
+                    <lightning:fileUpload aura:id="fileUpload"
+                        label="Resume"
+                        multiple="false"
+                        accept="{!v.accept}"
+                        disabled="false"
+                        recordId="{!v.Candidate.Id}"
+                        onuploadfinished="{! c.handleUploadFinished }"/>
+                        
+                        <aura:set attribute="else">
+                            <lightning:button class="cbtn" label="Preview file" iconName="utility:attach" iconPosition="left" onclick="{!c.previewFile}"  variant="inverse" />	
+                        </aura:set>
+                    </aura:if>
+				</aura:if>
+			</aura:set>
+            <c:info Candidate="{!v.Candidate}" user="{!v.user}"/>
+            
+            <br/>
+            <c:datePicker disabled="{!v.Candidate.Status__c == 'Hired'}" btns="{!v.Candidate.Colloquies__r}"/>
+            <c:dateEditor colloquies="{!v.Candidate.Colloquies__r}" id="{!v.Candidate.Id}"/>
+			<br/>
+			<c:commentary replies="{!v.Candidate.Comments__r}" sender="{!v.user}" resource="{!v.Candidate}"/>
+            </lightning:card>
+            <aura:set attribute="else">
+				<lightning:spinner alternativeText="Loading" size="large" />
+            </aura:set>
+        </aura:if>
+        
+    </lightning:layoutItem>
+</aura:component>

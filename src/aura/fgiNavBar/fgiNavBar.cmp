@@ -1,0 +1,30 @@
+<aura:component >
+    <aura:attribute name="role" type="String" default="none"/>
+    <aura:registerEvent name="fgiNext" type="c:fgiNext"/>
+	<div class="bar slds-clearfix ">
+        <lightning:button onclick="{!c.handleClick}" variant="base" name="{! v.role == 'none' ? 'home' : 'user' }" class="bungee slds-text-heading_large slds-float_left" label="Feel good Inc."/>
+
+        <aura:if isTrue="{! v.role=='none'}">
+        	<lightning:button onclick="{!c.handleClick}" variant="base" name="signup" class="slds-float_right slds-text-heading_medium nbtn" label="Sign Up"/>
+			<lightning:button onclick="{!c.handleClick}" variant="base" name="signin" class="slds-float_right slds-text-heading_medium nbtn" label="Sign In"/>
+        	<lightning:button onclick="{!c.handleClick}" variant="base" name="join" class="slds-float_right slds-text-heading_medium nbtn" label="Join"/>
+
+            <aura:set attribute="else">
+            	<lightning:button onclick="{!c.signOut}" variant="base" name="home" class="slds-float_right slds-text-heading_medium nbtn" label="Log out"/>
+                <lightning:button onclick="{!c.handleClick}" variant="base" name="employees" class="slds-float_right slds-text-heading_medium nbtn" label="Employees"/>
+            </aura:set>
+        </aura:if>        
+        <aura:if isTrue="{! v.role=='admin'}">
+        	<lightning:button onclick="{!c.handleClick}" variant="base" name="users" class="slds-float_right slds-text-heading_medium nbtn" label="Users"/>
+        </aura:if>
+		<aura:if isTrue="{! v.role=='hr' || v.role=='admin'}">
+        	<lightning:button onclick="{!c.handleClick}" variant="base" name="candidats" class="slds-float_right slds-text-heading_medium nbtn" label="Candidats"/>
+			<lightning:button onclick="{!c.handleClick}" variant="base" name="apps" class="slds-float_right slds-text-heading_medium nbtn" label="Applications"/>
+            <lightning:button onclick="{!c.handleClick}" variant="base" name="calendar" class="slds-float_right slds-text-heading_medium nbtn" label="Calendar"/>
+        </aura:if>
+
+
+
+
+	</div>
+</aura:component>

@@ -1,0 +1,8 @@
+<aura:component controller="FireEmployee">
+    <aura:attribute name="Resource" type="Object"/>
+    <aura:registerEvent name="fgiNext" type="c:fgiNext"/>
+    <lightning:overlayLibrary aura:id="overlayLib"/>
+    
+	<lightning:textarea aura:id="template" value="{! 'Dear ' + v.Resource.Name +'.\n\n We were glad to work with you, but unfortunately we are sad to say, that you are fired because of (place the reason here). \n\n With best regards, your Feel Good Inc.' }" />
+    <lightning:button label="Fire" variant="destructive" class="slds-align_absolute-center" onclick="{! c.handleClick }"/>
+</aura:component>

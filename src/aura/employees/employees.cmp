@@ -1,0 +1,48 @@
+<aura:component controller="Employees">
+    
+    <aura:attribute name="data" type="List"/>
+    <aura:attribute name="filtered" type="List"/>
+    <aura:attribute name="columns" type="List"/>
+    <aura:attribute name="hideSpinner" type="Boolean" default="false"/>
+    <aura:attribute name="offset" type="Integer" default="0"/>
+    <aura:attribute name="isStandard" type="Boolean"/>
+    
+    <aura:registerEvent name="fgiNext" type="c:fgiNext"/>
+    <aura:registerEvent name="viewCandidate" type="c:viewCandidate"/> 
+    <aura:handler name="redirectModal" event="c:redirectModal" action="{!c.redirectModal}"/>
+    <aura:handler name="init" action="{! c.doInit }" value="{!this}"/>
+    <aura:handler name="render" value="{!this}" action="{!c.onRender}"/>
+	
+	<lightning:overlayLibrary aura:id="overlayLib"/>
+	<lightning:layoutItem size="12" padding="around-small" class="slds-m-bottom_medium">
+        <aura:if isTrue="{! v.hideSpinner }">
+            <lightning:card >
+                <aura:set attribute="title">
+                    <h1 class="slds-text-heading_large"> Employees</h1>
+                </aura:set>
+				<lightning:input class="slds-m-around_small"
+                    onchange="{!c.search}"
+                    aura:id="search"
+                    type="search"
+					placeholder="Search by Name/Position"
+                />
+                <br/>
+                <lightning:datatable data="{! v.filtered }"
+                    class="cols"
+                    columns="{! v.columns }"
+                    keyField="id"
+                    minColumnWidth="50px"
+                    maxColumnWidth="150px"
+                    resizeColumnDisabled="true"
+                    hideCheckboxColumn="true"
+                    onrowaction = "{! c.handleRow }"/>	
+                <br/>
+                <br/>
+
+            </lightning:card>
+            <aura:set attribute="else">
+				<lightning:spinner alternativeText="Loading" size="large" />
+            </aura:set>
+		</aura:if>
+    </lightning:layoutItem>
+</aura:component>

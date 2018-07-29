@@ -1,0 +1,25 @@
+.THIS .bungee{
+    font-family: 'Bungee Inline';
+    padding: 5px;
+    color: #16325c;
+}
+.THIS .btn{
+    background-color: #16325c;
+    color:white;
+}
+.THIS .btn:hover{
+	animation-name: colorOnHover;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+@font-face {
+	font-family: 'Bungee Inline';
+	src: url(/resource/BungeeInline);
+}
+@keyframes colorOnHover {
+    0% {color: Aqua;}
+    50% {color: LawnGreen;}
+    100% {color: Pink;}
+}

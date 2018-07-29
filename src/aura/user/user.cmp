@@ -1,0 +1,27 @@
+<aura:component controller="UserEditor">
+  <aura:attribute name="user" type="AppUser__c"/>
+
+    <lightning:layoutItem size="12" padding="around-small">
+        <lightning:card>
+            <aura:set attribute="title">
+            	<lightning:input value="{!v.user.Resource__r.Name}" class="slds-text-heading_large inpt" placeholder="Name" type="text" label="Name" required="true" aura:id="name"/>
+            </aura:set>
+
+                <lightning:layout verticalAlign="center" horizontalAlign="center">
+                        <lightning:layoutItem size="12" padding="around-large">
+                            <lightning:input value="{!v.user.Login__c}" class="inpt slds-text-heading_medium" placeholder="Login" label="Login" required="true" aura:id="lgn"/>
+                            <br/>
+
+                            <lightning:input value="{!v.user.Resource__r.Phone__c}" class="inpt slds-text-heading_medium" placeholder="Phone" label="Phone" type="tel" aura:id="phone"/>
+                            <br/>
+
+                            <lightning:input value="{!v.user.Resource__r.Email__c}" class="inpt slds-text-heading_medium" placeholder="Email" required="true" label="Email" aura:id="email"/>
+                            <br/>
+                            <lightning:input value="{!v.user.Password__c}" class="inpt slds-text-heading_medium" placeholder="Password" label="Password" type="password" aura:id="pass"/>
+                            <br/>
+                            <lightning:button label="Accept" variant="neutral" title="Neutral action" class="btn slds-align_absolute-center" onclick="{! c.handleClick }"/>
+                    </lightning:layoutItem>
+                </lightning:layout>
+		</lightning:card>
+    </lightning:layoutItem>
+</aura:component>

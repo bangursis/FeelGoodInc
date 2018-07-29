@@ -1,0 +1,17 @@
+.THIS table td {
+    background-color: #16325c;
+    color: white;
+}
+.THIS table td a{
+    color: white;
+}
+.THIS table th {
+    border-color: white;
+}
+.THIS .fc-today{
+    background-color: #87CEEB !important;
+}
+
+.THIS .fc-content{
+    font-size:15px !important;
+}

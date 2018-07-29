@@ -1,0 +1,3 @@
+<aura:event type="APPLICATION" description="Event template">
+    <aura:attribute name="candidateId" type="Resource__c"/>
+</aura:event>

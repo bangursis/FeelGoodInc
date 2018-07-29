@@ -1,0 +1,24 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes" access="global" controller="Colloqies" >
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="candidate" type="Object" />
+	<aura:registerEvent name="viewCandidate" type="c:viewCandidate"/>
+    <aura:registerEvent name="fgiNext" type="c:fgiNext"/>
+
+  	<ltng:require 
+		styles="{!$Resource.fullcalendarCss}"
+		scripts="{!join(',', 
+             	$Resource.moment,
+             	$Resource.jquery,
+				$Resource.fullcalendarJs	
+			)}"
+    	afterScriptsLoaded="{!c.scriptsLoaded}" />
+    
+    	
+        <lightning:card>
+			<aura:set attribute="title">
+                <h1 class="slds-text-heading_large"> Interview Dates</h1>
+            </aura:set>
+            <div id="calendar" style="height:100%; z-index:1"/>
+        </lightning:card>
+        
+</aura:component>

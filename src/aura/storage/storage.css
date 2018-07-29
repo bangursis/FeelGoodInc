@@ -1,0 +1,20 @@
+.THIS .accept svg{
+    fill:#75f22e;
+    min-height: 10px;
+}
+
+.THIS .close svg{
+    fill:#f44242;
+    min-height: 10px;
+}
+
+.THIS .accept{
+	background-color:white;
+}
+
+.THIS .close{
+	background-color:white;
+}
+.THIS .btn{
+    background-color: #16325c;
+}

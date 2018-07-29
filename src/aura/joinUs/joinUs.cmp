@@ -1,0 +1,26 @@
+<aura:component controller="JoinUs">    	
+    <lightning:layoutItem size="8" padding="around-small">
+        <lightning:card >
+            <aura:set attribute="title">
+                <h1 class="bungee slds-align_absolute-center slds-text-heading_large"> JoIN US</h1>
+                <h2 class="slds-text-heading_small slds-text-color_weak slds-align_absolute-center"> Provide us with information about yourself to become a part of our team.</h2>
+            </aura:set>
+            <lightning:layout horizontalAlign="center">
+                <lightning:layoutItem size="8" >
+                    
+                    <lightning:input placeholder="Name" label="Name" aura:id="name"/>
+                    <br/>                 
+                    <lightning:input placeholder="Phone" label="Phone" aura:id="phone" type="phone"/>
+                    <br/>
+					<lightning:input placeholder="Email" label="Email" aura:id="email" type="email"/>
+                    <br/>
+                    <lightning:input placeholder="Desired position" label="Desired position" aura:id="position"/>
+                    <br/>
+                    <lightning:button label="Send" variant="neutral" title="Neutral action" class="btn slds-align_absolute-center" onclick="{! c.join }"/>
+                    <br/>
+                </lightning:layoutItem>
+      
+            </lightning:layout>
+        </lightning:card>
+	</lightning:layoutItem>
+</aura:component>

@@ -1,0 +1,14 @@
+<aura:component >
+    <aura:registerEvent name="changeDateIndex" type="c:changeDateIndex"/>
+    <aura:attribute name="btns" type="List"/>
+    <aura:attribute name="disabled" type="Boolean" default="false"/>
+    <aura:handler event="c:insertColloquy" action="{!c.insertColl}" />
+    
+	<div class="bar slds-clearfix nav">
+        <lightning:buttonIcon onclick="{!c.new}" disabled="{!v.disabled}" class="btn slds-m-left_small slds-float_left icn" iconName="utility:add" variant="bare" size="large" alternativeText="Settings" />
+        <aura:iteration items="{!v.btns}" var="b" indexVar="index">
+        	<lightning:button variant="base" class="slds-float_left slds-m-left_small slds-m-top_xxx-small slds-text-heading_medium btnNav" label="{!b.ColloquyDate__c}" onclick="{!c.updateIndex}" value="{!index}"/>
+        </aura:iteration>
+        
+	</div>
+</aura:component>

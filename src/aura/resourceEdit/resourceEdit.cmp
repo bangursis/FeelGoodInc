@@ -1,0 +1,43 @@
+<aura:component >
+    <aura:attribute name="Employee" type="Resource__c"/>
+	<aura:registerEvent name="viewCandidate" type="c:viewCandidate"/>
+    
+    <lightning:overlayLibrary aura:id="overlayLib"/>
+	<lightning:recordEditForm recordId="{!v.Employee.Id}" objectApiName="Resource__c">
+        <lightning:layout>
+    
+			<lightning:layoutItem size="3" padding="around-small">
+                <lightning:inputField fieldName="Name" />
+				<br/>
+                <lightning:inputField fieldName="Position__c" />
+            </lightning:layoutItem>
+                    
+			<lightning:layoutItem size="3" padding="around-small">
+                <lightning:inputField fieldName="Email__c" />
+				<br/>
+                <lightning:inputField fieldName="Experience__c" />
+                                
+			</lightning:layoutItem>
+                    
+			<lightning:layoutItem size="3" padding="around-small"> 
+                <lightning:inputField fieldName="Phone__c" />
+            </lightning:layoutItem>
+                    
+			<lightning:layoutItem size="3" padding="around-small">
+				<lightning:inputField fieldName="Salary__c" />
+                <br/>
+                <br/>
+                <lightning:layout>
+                 	<lightning:layoutItem size="6" padding="right-xxx-small">
+			            <lightning:button type="submit" label="Update" variant="neutral" title="Neutral action" class="btn slds-align_absolute-center"/>
+	                </lightning:layoutItem>
+					<lightning:layoutItem size="6" padding="left-xxx-small">
+			            <lightning:button label="Fire" variant="destructive" class="slds-align_absolute-center" onclick="{! c.fire }"/>
+	                </lightning:layoutItem>
+				</lightning:layout>
+                            
+			</lightning:layoutItem>
+                
+        </lightning:layout>
+	</lightning:recordEditForm>    
+</aura:component>

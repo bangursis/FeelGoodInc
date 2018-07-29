@@ -1,0 +1,5 @@
+<aura:component >
+	<lightning:layoutItem size="12" padding="around-medium">
+        <c:testCallendar/>
+    </lightning:layoutItem>
+</aura:component>

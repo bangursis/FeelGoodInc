@@ -1,0 +1,12 @@
+.THIS .btn{
+    background-color: #16325c;
+    color:white;
+}
+.THIS .inpt input{
+    border: 0px solid white;
+}
+
+.THIS .inpt input:focus{
+	outline-width: 0;
+	text-decoration: underline solid #16325c;  	
+}

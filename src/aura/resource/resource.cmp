@@ -1,0 +1,11 @@
+<aura:component controller="CandidateInfo">
+    <aura:attribute name="Employee" type="Resource__c"/>
+    <aura:attribute name="isStandard" type="Boolean" default="true"/>
+    
+    <aura:if isTrue="{!v.isStandard}">
+    	<c:resourceView recordId="{!v.Employee.Id}"/>
+    	<aura:set attribute="else">
+            <c:resourceEdit Employee="{!v.Employee}"/>
+    	</aura:set>
+    </aura:if>
+</aura:component>

@@ -1,0 +1,54 @@
+<aura:component controller="CandidateInfo">
+    <aura:attribute name="isNew" type="Boolean" default="false"/>
+    <aura:attribute name="Candidate" type="Resource__c"/>
+    <aura:attribute name="Hrs" type="List"/>
+    <aura:attribute name="disabled" type="Boolean" default="true"/>
+    <aura:attribute name="statuses" type="List" default="['Start','Form','Test task','Interview','Making a decision','Hired']"/>
+	<aura:registerEvent name="viewCandidate" type="c:viewCandidate"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler name="render" value="{!this}" action="{!c.change}"/>
+	<lightning:overlayLibrary aura:id="overlayLib"/>
+    <lightning:messages/>
+    
+    <lightning:layout>
+                <lightning:layoutItem size="3" padding="around-small">
+                    <lightning:input onchange="{!c.change}" value="{!v.Candidate.Name}" placeholder="Name" type="text" label="Name" required="true" aura:id="name"/>
+                    <br/>
+                    <lightning:input onchange="{!c.change}" value="{!v.Candidate.Position__c}" placeholder="Position" label="Position" required="true" aura:id="position"/>
+                </lightning:layoutItem>
+                
+                <lightning:layoutItem size="3" padding="around-small">
+					<lightning:select onchange="{!c.change}" value="{!v.Candidate.HR__c}" aura:id="hr" label="Select a HR" required="true">
+                        <aura:iteration items="{!v.Hrs}" var="hr">
+                            <option selected="{!v.Candidate.HR__c == hr.Id}" text="{!hr.Name}" value="{!hr.Id}"></option>
+                        </aura:iteration>
+                    </lightning:select>
+                    <br/>
+                    <lightning:input value="{!v.Candidate.Phone__c}" placeholder="Phone" label="Phone" type="tel" aura:id="phone"/>
+                </lightning:layoutItem>
+                
+                <lightning:layoutItem size="3" padding="around-small">                	
+                    <lightning:input onchange="{!c.change}" value="{!v.Candidate.Email__c}" placeholder="Email" required="true" type="email" label="Email" aura:id="email"/>
+                    <br/>
+					<lightning:select onchange="{!c.change}" aura:id="status" label="Select a status" required="true">
+                        <aura:iteration items="{!v.statuses}" var="status">
+                            <option selected="{!v.Candidate.Status__c == status}" text="{!status}" value="{!status}"></option>
+                        </aura:iteration>
+                    </lightning:select>
+                </lightning:layoutItem>
+                
+                <lightning:layoutItem size="3" padding="around-small">
+                    <lightning:layout>
+                        <lightning:layoutItem size="6" padding="right-xxx-small">
+                            <lightning:input value="{!v.Candidate.Salary__c}" formatter="currency" type="number" placeholder="Salary" label="Sallary" aura:id="salary"/>
+                        </lightning:layoutItem>
+                        <lightning:layoutItem size="6" padding="left-xxx-small">
+                            <lightning:input value="{!v.Candidate.Experience__c}" placeholder="Experience" type="number" label="Experience" aura:id="exp"/>
+                        </lightning:layoutItem>
+                    </lightning:layout>                   
+                    <br/>
+                    <br/>
+                    <lightning:button disabled="{!v.disabled}" label="{!v.isNew? 'Create' : 'Update'}" variant="neutral" title="Neutral action" class="btn slds-align_absolute-center" onclick="{! c.handleClick }"/>
+                </lightning:layoutItem>
+	</lightning:layout>
+</aura:component>

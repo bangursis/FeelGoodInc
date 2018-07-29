@@ -1,0 +1,12 @@
+<aura:component >
+    <aura:attribute name="Candidate" type="Object"/>
+    <aura:attribute name="user"  type="AppUser__c"/>
+    <aura:handler event="c:hire" action="{!c.hire}"/>
+    
+            <aura:if isTrue="{!v.Candidate.Status__c != 'Hired'}">
+                <c:candidateInfo Candidate="{!v.Candidate}"/>
+                <aura:set attribute="else">
+                    <c:resource Employee="{!v.Candidate}" isStandard="{!v.user.Role__c == 'standard'}"/>
+				</aura:set>
+            </aura:if>
+</aura:component>

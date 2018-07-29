@@ -1,0 +1,37 @@
+<aura:component controller="AppUsers">
+    <aura:attribute name="roles" type="String[]" default="Admin,HR,Standard"/>
+    <aura:attribute name="data" type="List"/>
+    <aura:attribute name="columns" type="List"/>
+    <aura:attribute name="rolesMap" type="Map" default="{}"/>
+    <aura:handler name="init" action="{! c.doInit }" value="{!this}"/>
+
+	<lightning:layoutItem size="12" padding="around-small">
+		<lightning:card >
+            <aura:set attribute="title">
+            	<h1 class="slds-text-heading_large"> Users</h1>
+            </aura:set>
+            <lightning:layout>
+                <lightning:layoutItem size="7" padding="around-medium">
+					<lightning:datatable data="{! v.data }"
+                            class="cols"
+                            columns="{! v.columns }"
+                            keyField="id"
+                            minColumnWidth="50px"
+                            maxColumnWidth="150px"
+                            resizeColumnDisabled="true"
+                            hideCheckboxColumn="true"/>
+                </lightning:layoutItem>
+                <lightning:layoutItem size="3" padding="around-medium">
+					<lightning:select aura:id="select" label="Select a role" >
+                        <option text="--Select a role--" value=""/>
+                        <aura:iteration items="{!v.roles}" var="role">
+                            	<option text="{!role}" value="{!role}" />
+						</aura:iteration>
+                    </lightning:select>
+                    <br/>
+                	<lightning:button class="btn slds-align_absolute-center" label="Ok" onclick="{!c.applyFilter}"  variant="inverse" />
+                </lightning:layoutItem>
+            </lightning:layout>
+        </lightning:card>
+    </lightning:layoutItem>
+</aura:component>

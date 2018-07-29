@@ -1,0 +1,26 @@
+<aura:component >
+    <aura:attribute name="recordId" type="String"/>
+	<aura:registerEvent name="viewCandidate" type="c:viewCandidate"/>
+    
+	<lightning:recordViewForm  recordId="{!v.recordId}" objectApiName="Resource__c">
+        <lightning:layout>
+    
+			<lightning:layoutItem size="3" padding="around-small">
+                <lightning:outputField fieldName="Position__c" />
+            </lightning:layoutItem>
+                    
+			<lightning:layoutItem size="3" padding="around-small">
+                <lightning:outputField fieldName="Email__c" />      
+			</lightning:layoutItem>
+                    
+			<lightning:layoutItem size="3" padding="around-small"> 
+                <lightning:outputField fieldName="Phone__c" />
+            </lightning:layoutItem>
+            
+			<lightning:layoutItem size="3" padding="around-small"> 
+                <lightning:outputField fieldName="Experience__c" />
+            </lightning:layoutItem>
+                
+        </lightning:layout>
+    </lightning:recordViewForm>    
+</aura:component>

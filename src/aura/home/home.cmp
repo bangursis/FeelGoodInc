@@ -1,0 +1,12 @@
+<aura:component >
+    <aura:registerEvent name="fgiNext" type="c:fgiNext"/>
+    <lightning:layoutItem size="12">
+        
+                <div style="margin:13% 20% 14%; background-color:white; text-align:center;" class="slds-m-top_xx-large card"> 
+                    <h1 class="slds-p-top_medium" style="margin-bottom: 29px;">JoIN US ToDAY</h1> 
+                    <br/> 
+                    <lightning:button label="Join" name="join" variant="neutral" title="Add a comment" class="btn slds-align_absolute-center slds-m-bottom_medium" onclick="{!c.handleClick}"/> 
+                </div>
+		
+    </lightning:layoutItem>
+</aura:component>

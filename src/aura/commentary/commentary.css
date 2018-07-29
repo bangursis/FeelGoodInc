@@ -1,0 +1,11 @@
+.THIS .bdy{
+    border: 1px solid darkgray;
+    max-height:500px;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+.THIS .btn{
+    background-color: #16325c;
+    color:white;
+}

@@ -1,0 +1,32 @@
+.THIS .icn svg{
+    fill:#75f22e;
+    min-height: 10px;
+}
+.THIS .btnNav{
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 20px; 
+    color:white;
+}
+.THIS .icn{
+	padding-top: 4px;
+    padding-bottom: 3px;
+}
+.THIS{
+    background-color: #16325c;
+    color:white;
+    border: darkgrey;
+    width:100%; z-index:1;
+    height:54px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+.THIS .bdy{
+    border: 1px solid darkgray;
+    background-color: white;
+}
+
+.THIS .btn{
+    background-color: #16325c;
+    color:white;
+}

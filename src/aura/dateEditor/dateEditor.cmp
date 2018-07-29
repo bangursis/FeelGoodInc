@@ -1,0 +1,26 @@
+<aura:component controller="DateEditor">
+    <aura:attribute name="id" type="String"/>
+    <aura:attribute name="disabled" type="Boolean" default="true"/>
+    <aura:attribute name="colloquies" type="List" default="[]"/>
+    <aura:attribute name="colloquy" type="Object" default="colloquies[0]"/>
+    <aura:handler event="c:changeDateIndex" action="{!c.updateIndex}"/>
+    <aura:registerEvent name="insertColloquy" type="c:insertColloquy"/>
+    
+    <div size="12" class="slds-m-around_x-small   slds-m-top_none slds-p-around_x-small slds-p-top_none">
+        <div class="slds-p-around_x-small bdy" style="{! v.disabled ? 'background-color:#ecebea ;' : 'background-color:white;'}">
+            <h1 class="slds-text-heading_medium">{!v.colloquy.ColloquyDate__c}</h1>
+            <lightning:textarea aura:id="form" disabled="{!v.disabled}" placeholder="Add a form..." value="{!v.colloquy.Form__c}"/><br/>
+            <lightning:layout >
+                <lightning:layoutItem size="6" padding="around-small" class="slds-m-around-x-small slds-m-right-large slds-m-left-large">
+                	<lightning:input required="true" disabled="{!v.disabled}" type="date" aura:id="date" value="{!v.colloquy.ColloquyDate__c}" label="Date"/>
+                </lightning:layoutItem>
+				<lightning:layoutItem size="6" padding="around-small" class="slds-m-around-x-small slds-m-right-large slds-m-left-large">
+                    <br/>
+                    <lightning:button disabled="{!v.disabled}" aura:id="btn" label="Save" value="{!v.colloquy}" variant="neutral" title="Add a comment" class="btn slds-align_absolute-center" onclick="{! c.handleClick }"/>
+                </lightning:layoutItem>
+            </lightning:layout>
+            <br/>
+
+        </div>
+    </div>
+</aura:component>

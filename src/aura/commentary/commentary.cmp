@@ -1,0 +1,17 @@
+<aura:component controller="Comments">
+    <aura:attribute name="replies" type="List"/>
+    <aura:attribute name="resource" type="Object"/>
+    <aura:attribute name="sender" type="AppUser__c"/>
+    <div class="slds-m-around_x-small slds-p-around_x-small">
+        <div class="slds-clearfix slds-p-around_x-small bdy">
+            <h1 class="slds-text-heading_medium">Comments</h1>
+            <lightning:textarea aura:id="body" placeholder="Add a public comment..."/><br/>
+            <lightning:button  label="Send" variant="neutral" title="Add a comment" class="slds-float_right btn slds-align_absolute-center" onclick="{! c.handleClick }"/><br/>
+            <br/>
+            <aura:iteration items="{!v.replies}" var="item">
+                <div class="slds-text-body_regular">{!item.Sender__c} (<lightning:formattedDateTime value="{!item.CreatedDate}" class="slds-text-body_small"/>)</div>
+                <lightning:textarea readonly="true" value="{!item.Body__c}"/>
+            </aura:iteration>
+        </div>
+    </div>
+</aura:component>

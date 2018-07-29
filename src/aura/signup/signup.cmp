@@ -1,0 +1,27 @@
+<aura:component controller="SignUp">
+  <aura:registerEvent name="sign" type="c:sign"/>
+  <aura:registerEvent name="fgiNext" type="c:fgiNext"/>
+    <lightning:layoutItem size="8" padding="around-small">
+        <lightning:card >
+            <aura:set attribute="title">
+                <span class="slds-text-heading_large"> Sign Up</span>
+            </aura:set>
+            <lightning:layout horizontalAlign="center">
+
+                <lightning:layoutItem size="8">
+                    <lightning:input placeholder="Email" type="email" label="Email" aura:id="email"/>
+                    <br/>
+                    <lightning:input placeholder="login" label="Login" aura:id="lgn"/>
+                    <br/>
+                    <lightning:input type="password" placeholder="Password" label="Password" aura:id="pass"/>
+                    <br/>
+                    <lightning:input type="password" placeholder="Repeat Password" label="Repeat Password" aura:id="rpass"/>
+                    <br/>
+                    <lightning:button label="Sign Up" variant="base" title="Neutral action" class="btn slds-align_absolute-center" onclick="{! c.signUp }"/>
+                    <br/>
+                </lightning:layoutItem>
+
+            </lightning:layout>
+        </lightning:card>
+    </lightning:layoutItem>
+</aura:component>

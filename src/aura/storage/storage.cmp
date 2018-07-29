@@ -1,0 +1,43 @@
+<aura:component controller="getStorageRecords">
+    <aura:attribute name="records" type="List"/>
+    <aura:registerEvent name="viewCandidate" type="c:viewCandidate"/>
+    <aura:registerEvent name="fgiNext" type="c:fgiNext"/>
+    <aura:handler name="init" value="{!this}" action="{! c.doInit }"/> 
+    <aura:attribute name="hideSpinner" type="Boolean" default="false"/>
+    
+    <lightning:overlayLibrary aura:id="overlayLib"/>
+    <lightning:layoutItem size="12" padding="around-small">
+        <aura:if isTrue="{! v.hideSpinner }">
+            <div class="slds-clearfix bdy">
+                <lightning:card >
+                    <aura:set attribute="title">
+                        <h1 class="slds-text-heading_large">Probable candidates	</h1>
+                    </aura:set>
+                    <aura:iteration items="{!v.records}" var="item" indexVar="index">
+                        <div class="slds-m-around_medium" style="border:2px solid #16325c; border-radius: 7px;">
+                            <h1  class="slds-text-heading_medium slds-m-top_medium slds-align_absolute-center">{!item.Name}</h1>
+                            <lightning:layout>
+                                <lightning:layoutItem padding="around-medium" size="3">
+                                    <div style="border-right: 1px solid #16325c;" class="slds-text-heading_small slds-align_absolute-center"><a href="{!'tel:' +item.phone }">{!item.Phone__c}</a></div>
+                                </lightning:layoutItem>
+                                <lightning:layoutItem padding="around-medium" size="3">
+                                    <div style="border-right: 1px solid #16325c;"  class="slds-text-heading_small slds-align_absolute-center"><a href="{!'mailto:' +item.email }">{!item.Email__c}</a></div>
+                                </lightning:layoutItem>
+                                <lightning:layoutItem padding="around-medium" size="3">
+                                    <div style="border-right: 1px solid #16325c;"  class="slds-text-heading_small slds-align_absolute-center">{!item.Position__c}</div>
+                                </lightning:layoutItem>
+                                <lightning:layoutItem padding="around-medium" size="3">                                
+                                        <lightning:buttonIcon onclick="{! c.decide }" name="reject" iconName="utility:close" variant="bare" value="{!index}" class="close slds-m-right_xx-small" size="large" alternativeText="Reject" />
+                                        <lightning:buttonIcon onclick="{! c.decide }" name="add" iconName="utility:add" variant="bare" value="{!index}" class="accept slds-m-left_xx-small" size="large" alternativeText="Accept" />                                
+                                </lightning:layoutItem>
+                            </lightning:layout >
+                        </div>
+                    </aura:iteration>
+                </lightning:card>
+            </div>
+            <aura:set attribute="else">
+				<lightning:spinner alternativeText="Loading" size="large" />	
+            </aura:set>
+        </aura:if>
+    </lightning:layoutItem>
+</aura:component>

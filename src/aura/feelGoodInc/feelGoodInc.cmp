@@ -1,0 +1,56 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes" >
+    <aura:attribute name="cmp" type="String" default="home"/>
+    <aura:attribute name="user" type="AppUser__c" />
+    <aura:attribute name="candidateId" type="Object" />
+    <aura:attribute name="img" type="String"/>  
+    
+    <aura:handler name="fgiNext" event="c:fgiNext" action="{!c.renderBody}"/>
+    <aura:handler event="c:sign" action="{!c.sign}"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler event="c:viewCandidate" action="{! c.candidate}"/>
+    <aura:handler event="c:redirectModal" action="{!c.redirectModal}"/>
+    
+ 
+	<body style="{! v.cmp =='home' ?  'height:100%; background: url(' + v.img +') no-repeat; background-position:center;background-size: cover;  overflow:hidden;' : 'background-color: rgb(176, 196, 223);  height:100%; overflow: scroll; overflow-x: hidden;' }">
+		<c:fgiNavBar role="{! not(empty(v.user)) ? v.user.Role__c : 'none' }"/>
+
+		<lightning:layout verticalAlign="center" horizontalAlign="center" class="slds-align_absolute-center">
+
+                    <aura.if isTrue="{! v.cmp=='home' }">
+                        <c:home/>
+                    </aura.if>
+                    <aura.if isTrue="{! v.cmp=='join' }">
+                        <c:joinUs/>
+                    </aura.if>
+                    <aura.if isTrue="{! v.cmp=='signup' }">
+                        <c:signup/>
+                    </aura.if>
+                    <aura.if isTrue="{! v.cmp=='signin' }">
+                        <c:signin/>
+                    </aura.if>
+                    <aura.if isTrue="{! v.cmp=='users' }">
+                        <c:appUsers/>
+                    </aura.if>
+                    <aura.if isTrue="{! v.cmp=='candidats' }">
+                        <c:candidatsTable/>
+                    </aura.if>
+                    <aura.if isTrue="{! v.cmp=='apps' }">
+                        <c:storage/>
+                    </aura.if>
+                    <aura.if isTrue="{! v.cmp=='user' }">
+                        <c:user user="{!v.user}"/>
+                    </aura.if>
+                    <aura.if isTrue="{!v.cmp=='candidate'}">
+                        <c:candidate Candidate="{!v.candidateId}" user="{!v.user}"/>
+                    </aura.if>
+                    <aura.if isTrue="{!v.cmp=='calendar'}">
+                        <c:Colloqies/>
+                    </aura.if>
+                   	<aura.if isTrue="{! v.cmp=='employees'}" >
+                        <c:employees isStandard="{!v.user.Role__c == 'standard'}"/>
+                    </aura.if>
+                    
+		</lightning:layout>
+             
+    </body>
+</aura:component>

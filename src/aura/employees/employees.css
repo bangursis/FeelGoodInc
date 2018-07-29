@@ -1,0 +1,29 @@
+.THIS .cols thead th span{
+    background-color: #16325c;
+    color: white;
+}
+.THIS .cols thead :hover{
+    background-color: #16325c;
+    color: white;
+}
+.THIS .cols thead :focus{
+    background-color: #16325c;
+    color: white;
+}
+.THIS .col thead{
+    background-color: #16325c;
+    color: white;
+}
+.THIS .col thead button{
+    display:none;
+}
+.THIS .col thead:active{
+    background-color: #16325c;
+    color: white;
+}
+.THIS .table{
+     text-align: center;
+}
+.THIS .btn{
+    background-color: #16325c;
+}
