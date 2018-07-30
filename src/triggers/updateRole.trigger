@@ -1,8 +1,9 @@
 trigger updateRole on Resource__c (after update) {
+    List<AppUser__c> user = [SELECT Role__c FROM AppUser__c WHERE Resource__c = :Trigger.newMap.keySet()];
+    
     for(Resource__c res : Trigger.New){
         
         if (res.Status__c.toLowerCase() == 'hired' ){
-            List<AppUser__c> user = [SELECT Role__c FROM AppUser__c WHERE Resource__c = :res.Id];
             
             if(user != null && user.size() > 0){
                 system.debug(user[0].Role__c + ' ' + res.Position__c.toLowerCase());
@@ -12,6 +13,7 @@ trigger updateRole on Resource__c (after update) {
                 }
                 else
                     user[0].Role__c = 'standard';
+
                 update user[0];
                 
 			}  
