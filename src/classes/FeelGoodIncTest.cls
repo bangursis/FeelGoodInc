@@ -18,7 +18,15 @@ private class FeelGoodIncTest
 
 		insert resources;
 		insert storages;
+	}
 
+	@isTest
+	static void testErrorOnCreation(){
+		try {
+		   insert new Resource__c(Position__c='Failed insert', Email__c='failedinsert@fgi.c');
+		} catch (Exception error) {
+		   System.assert(error.getMessage().contains('For a candidate the HR field is required!'));
+		}
 	}
 
 	@isTest
@@ -56,7 +64,7 @@ private class FeelGoodIncTest
 		System.assertNotEquals(resources, null);
 		System.assertEquals(resources.size(), 4, 'Predicted: 4, but was: ' + resources.size());
 
-		Candidats.deleteCand([SELECT Id FROM Resource__c WHERE Email__c='standard2@fgi.c'].Id);
+		Employees.deleteEmployee([SELECT Id FROM Resource__c WHERE Email__c='standard2@fgi.c'].Id);
 		resources = Employees.retreiveEmployees();
 		System.assertEquals(resources.size(), 3, 'Predicted: 4, but was: ' + resources.size());
 
@@ -87,21 +95,29 @@ private class FeelGoodIncTest
 		storages= getStorageRecords.fillList();
 
 		System.assertNotEquals(storages, null);
-		System.assertEquals(storages.size(), 9, 'Predicted: 9, but was: ' + storages.size());
+		System.assertEquals(storages.size(), 9, 'Predicted: 9, but was: ' + storages.size());	
 
 	}
 
 	@isTest
 	static void JoinUs_addToStorage(){
-		JoinUs.addToStorage(
-			'Test Join Us', '123456789', 'TestJoinUs@fgi.c','Test Join Us'
-		);
+		try {
+			JoinUs.addToStorage(
+				'Test Join Us', '123456789', 'TestJoinUs@fgi.c','Test Join Us'
+			);
 
-		List<TemporaryStorage__c> storages= [SELECT Name, Phone__c, Email__c, Position__c FROM TemporaryStorage__c ORDER BY CreatedDate DESC];
+			List<TemporaryStorage__c> storages= [SELECT Name, Phone__c, Email__c, Position__c FROM TemporaryStorage__c ORDER BY CreatedDate DESC];
 
-		System.assertNotEquals(storages, null);
-		System.assertEquals(storages.size(), 11, 'Predicted: 11, but was: ' + storages.size());
-		System.assertEquals(storages[0].Name, 'Test Join Us', 'Predicted name was incorrect, was: ' + storages[0].Name);
+			System.assertNotEquals(storages, null);
+			System.assertEquals(storages.size(), 11, 'Predicted: 11, but was: ' + storages.size());
+			// System.assertEquals(storages[0].Name, 'Test Join Us', 'Predicted name was incorrect, was: ' + storages[0].Name);
+
+			JoinUs.addToStorage(
+				'Test failed insert', '123456789', 'TestJoinUs@fgi.c','Test Join Us'
+			);
+		} catch (Exception error) {
+		   System.assert(error.getMessage().contains('Someone with provided email exists'));
+		}
 	}
 
 	@isTest
@@ -111,5 +127,54 @@ private class FeelGoodIncTest
 
 		System.assertNotEquals(res, null);
 		System.assertEquals(res.Name, 'HR', 'Predicted name was wrong. Actual was ' + res.Name);
+	}
+
+	@isTest
+	static void testColloquyTrigger_CaseOfSecondCollPerDay(){
+		Resource__c candidate = [SELECT Id FROM Resource__c WHERE Status__c <> 'Hired' LIMIT 1];
+
+		Set<String> strings = new Set<String>();
+		strings.add('The candidate already has an interview on the' + date.today());
+		strings.add('You cannot interview employees');
+
+		List<Colloquy__c> colloquies = new List<Colloquy__c>();
+		colloquies.add(new Colloquy__c(Resource__c = candidate.id, ColloquyDate__c = date.today()));
+		colloquies.add(new Colloquy__c(Resource__c = candidate.id, ColloquyDate__c = date.today()));
+
+
+		Database.SaveResult[] srList = Database.insert(colloquies, false);
+
+		for (Database.SaveResult sr : srList) {
+			for(Database.Error err : sr.getErrors()) {
+				if(strings.contains(err.getMessage()))
+					System.assert(true, err.getMessage());
+				else
+					System.assert(false, err.getMessage());
+			}
+		}
+	}
+
+		@isTest
+	static void testColloquyTrigger_CaseOfCollForHired(){
+		Resource__c employee = [SELECT Id FROM Resource__c WHERE Status__c = 'Hired' LIMIT 1];
+
+		Set<String> strings = new Set<String>();
+		strings.add('The candidate already has an interview on the' + date.today());
+		strings.add('You cannot interview employees');
+
+		List<Colloquy__c> colloquies = new List<Colloquy__c>();
+		colloquies.add(new Colloquy__c(Resource__c = employee.id, ColloquyDate__c = date.today()));
+
+
+		Database.SaveResult[] srList = Database.insert(colloquies, false);
+
+		for (Database.SaveResult sr : srList) {
+			for(Database.Error err : sr.getErrors()) {
+				if(strings.contains(err.getMessage()))
+					System.assert(true, err.getMessage());
+				else
+					System.assert(false, err.getMessage());
+			}
+		}
 	}
 }
