@@ -7,7 +7,6 @@ public class CandidateInfo {
     public static Resource__c updateCand(String name, String position, String HR, String phone, String email, String status, Decimal sallary, Decimal experience,Id rId){
     	List<Resource__c> rss = [SELECT Id, Name,Position__c,HR__c,Phone__c,Email__c,Status__c,Salary__c,Experience__c   FROM Resource__c WHERE Id = :rId LIMIT 1];
         
-       
         if (rss == null || rss.size() < 1){
             rss = new List<Resource__c>();
             rss.add(new Resource__c());

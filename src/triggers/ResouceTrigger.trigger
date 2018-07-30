@@ -2,10 +2,11 @@ trigger ResouceTrigger on Resource__c (before insert,before update, after update
 
 	if(Trigger.isBefore && (Trigger.isInsert || Trigger.isUpdate))
 		ResourceTriggerHandler.hrRequired(Trigger.new);
-	if(Trigger.isAfter && (Trigger.isInsert || Trigger.isUpdate)){
+	if(Trigger.isAfter && (Trigger.isInsert || Trigger.isUpdate))
 		ResourceTriggerHandler.updateRole(Trigger.newMap.keySet(), Trigger.new);
+	if(Trigger.isAfter && (Trigger.isInsert))
 		ResourceTriggerHandler.deleteStorage(Trigger.new);
-	}
+	
 
 		
 
