@@ -102,15 +102,17 @@ private class FeelGoodIncTest
 	@isTest
 	static void JoinUs_addToStorage(){
 		try {
-			JoinUs.addToStorage(
-				'Test Join Us', '123456789', 'TestJoinUs@fgi.c','Test Join Us'
-			);
+			Test.startTest();
+				JoinUs.addToStorage(
+					'Test Join Us', '123456789', 'TestJoinUs@fgi.c','Test Join Us'
+				);
+			Test.stopTest();
 
 			List<TemporaryStorage__c> storages= [SELECT Name, Phone__c, Email__c, Position__c FROM TemporaryStorage__c ORDER BY CreatedDate DESC];
 
 			System.assertNotEquals(storages, null);
 			System.assertEquals(storages.size(), 11, 'Predicted: 11, but was: ' + storages.size());
-			// System.assertEquals(storages[0].Name, 'Test Join Us', 'Predicted name was incorrect, was: ' + storages[0].Name);
+			System.assertEquals(storages[0].Name, 'Test Join Us', 'Predicted name was incorrect, was: ' + storages[0].Name);
 
 			JoinUs.addToStorage(
 				'Test failed insert', '123456789', 'TestJoinUs@fgi.c','Test Join Us'
